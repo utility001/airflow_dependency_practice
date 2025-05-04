@@ -13,7 +13,7 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 
 Step 3: Create a [Dockerfile](./Dockerfile) and define the logic you want to use to build your custom image. In my case
 + I used apache/airflow:2.9.0 as my base image
-+ copied my local requirements.txt file to the root folder in the container
++ copied my local requirements.txt file into the root folder in the image
 + upgraded pip
 + Installed/updated some packages
 
