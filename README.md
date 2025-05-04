@@ -11,25 +11,28 @@ mkdir -p ./dags ./logs ./plugins ./config
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
-Step 3: Create a Dockerfile and define the logic you want to use to build your custom image. In my case
+Step 3: Create a [Dockerfile](./Dockerfile) and define the logic you want to use to build your custom image. In my case
 + I used apache/airflow:2.9.0 as my base image
-+ copied requirements.txt file to the root folder in the container
++ copied my local requirements.txt file to the root folder in the container
 + upgraded pip
-+ Installed some extra packages
++ Installed/updated some packages
 
-Step 4: Build the custom image
+Step 4: Build the custom image from the Dockerfile
+This is the syntax
 ```bash
 docker build -t name:version .
 ```
+
 In my case, the command is
 
 ```bash
 docker build -t airflow-extended:1.0.0 . 
 ```
+The name of my custom image is `airflow-extended:1.0.0`
+
 > Note, you have to be in the same directory as the Dockerfile
 
-
-Step 5: Change the build image in the docker compose.yaml file from
+Step 5: Modify the docker-compose.yaml file by changing the default image line
 ```yaml
 image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.9.0}
 ```
